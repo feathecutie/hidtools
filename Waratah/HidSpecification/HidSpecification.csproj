@@ -13,13 +13,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <PropertyGroup>
-    <USBIFHUT>https://www.usb.org/sites/default/files/hut1_5.pdf</USBIFHUT>
-  </PropertyGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <DownloadFile SourceUrl="$(USBIFHUT)" DestinationFolder="obj">
-      <Output TaskParameter="DownloadedFile" ItemName="EmbeddedResource" />
-    </DownloadFile>
+    <ItemGroup>
+      <Pdf Include="hut1_5.pdf"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(Pdf)" DestinationFolder="obj">
+        <Output TaskParameter="CopiedFiles" ItemName="EmbeddedResource"/>
+    </Copy>
   </Target>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
